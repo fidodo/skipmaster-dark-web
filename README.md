@@ -10,6 +10,7 @@ A modern, responsive web application for skip hire services built with React, Ty
 - **Progressive Form Flow**: Step-by-step process with visual progress tracking
 - **API Integration**: Dynamic skip data fetching from external API
 - **Mobile-First Approach**: Touch-friendly interactions and responsive layouts
+- **Skip Selection with Visual Feedback**: Selected skips display badges and disabled state
 
 ## Technical Approach
 
@@ -27,8 +28,9 @@ The application follows a component-based architecture with the following key pr
 - `HeroSection`: Postcode input and main heading
 - `WasteTypeSelector`: Checkbox selection for waste types
 - `SkipSelection`: Dynamic skip options with API integration
-- `SelectedSkipInfo`: Display selected skip details
+- `SelectedSkipInfo`: Display selected skip details under "Ready to Proceed"
 - `NavigationTabs`: Progress tracking with visual indicators
+- `SkipCard`: Individual skip cards with selection state management
 
 ### Data Flow
 
@@ -37,12 +39,43 @@ The application follows a component-based architecture with the following key pr
 3. **Skip Selection**: Fetches available skips → user selects → displays info
 4. **Progress Tracking**: Navigation tabs update based on completion status
 
+### Skip Selection UX Features
+
+- **Visual Selection State**: Selected skips show a blue "Selected" badge
+- **Button State Management**: "Select This Skip" changes to "Selected" and becomes disabled
+- **Selected Skip Display**: Chosen skip information appears under "Ready to Proceed" text
+- **Price Calculation**: Shows price before VAT, VAT amount, and total price
+- **Skip Details**: Displays hire period, size, road placement, and heavy waste acceptance
+
 ### API Integration
 
 The application integrates with the WeWantWaste API:
 - **Endpoint**: `https://app.wewantwaste.co.uk/api/skips/by-location`
+- **Parameters**: `postcode=NR32&area=Lowestoft`
 - **Fallback**: Default skip data if API is unavailable
 - **Error Handling**: Graceful degradation with local data
+
+### Skip Data Structure
+
+The API returns skip objects with the following structure:
+```typescript
+{
+  id: number,
+  size: number,
+  price_before_vat: number,
+  vat: number,
+  hire_period_days: number,
+  allowed_on_road: boolean,
+  allows_heavy_waste: boolean,
+  forbidden: boolean,
+  area: string,
+  postcode: string,
+  created_at: string,
+  updated_at: string,
+  per_tonne_cost: number | null,
+  transport_cost: number | null
+}
+```
 
 ### Responsive Strategy
 
@@ -65,7 +98,23 @@ const [isPostcodeCompleted, setIsPostcodeCompleted] = useState(false);
 - Skip selection only appears after waste types are selected
 - Navigation tabs show progress with checkmarks
 - Continue button enables only when all steps complete
-- Selected skip information displays before final CTA
+- Selected skip information displays under "Ready to Proceed" text
+- Skip cards show visual selection state with badges and button changes
+
+## Recent Updates
+
+### Skip Selection Enhancement
+- Added visual feedback for selected skips with blue "Selected" badge
+- Button state changes from "Select This Skip" to "Selected" when chosen
+- Selected skip information now displays under "Ready to Proceed" text
+- Improved mobile responsiveness for skip selection interface
+- Enhanced price display with VAT breakdown
+
+### UI/UX Improvements
+- Better visual hierarchy with selected skip information placement
+- Consistent button states across different screen sizes
+- Improved accessibility with proper disabled states
+- Enhanced visual feedback for user interactions
 
 ## Getting Started
 
@@ -89,3 +138,4 @@ const [isPostcodeCompleted, setIsPostcodeCompleted] = useState(false);
 - Optimized text sizes for readability
 - Stacked navigation for smaller screens
 - Efficient use of screen real estate
+- Adaptive skip card layouts for different screen sizes

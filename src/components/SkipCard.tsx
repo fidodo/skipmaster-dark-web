@@ -103,15 +103,17 @@ const SkipCard: React.FC<SkipCardProps> = ({ skip, isSelected, onSelect }) => {
         </div>
 
         <button
-          onClick={() => skip.available && onSelect(skip.id)}
-          disabled={!skip.available}
+          onClick={() => skip.available && !isSelected && onSelect(skip.id)}
+          disabled={!skip.available || isSelected}
           className={`w-full py-2 md:py-3 rounded-lg font-medium transition-colors text-sm md:text-base ${
-            skip.available
+            isSelected
+              ? "bg-green-500 text-white cursor-default"
+              : skip.available
               ? "bg-[#4C6EF5] hover:bg-[#3B5BDB] text-white"
               : "bg-gray-600 text-gray-400 cursor-not-allowed"
           }`}
         >
-          {skip.available ? "Select This Skip" : "Not Available"}
+          {isSelected ? "Selected" : skip.available ? "Select This Skip" : "Not Available"}
         </button>
       </div>
     </div>
