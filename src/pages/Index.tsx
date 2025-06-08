@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import NavigationTabs from "../components/NavigationTabs";
 import HeroSection from "../components/HeroSection";
@@ -30,7 +29,7 @@ const Index = () => {
 
   const isWasteTypeCompleted = selectedWasteTypes.length > 0;
   const isSkipSelected = selectedSkip !== null;
-
+  console.log("indexi", skips);
   return (
     <div className="min-h-screen bg-[#1C2526] text-white">
       {/* Header */}
@@ -93,6 +92,7 @@ const Index = () => {
           isWasteTypeCompleted={isWasteTypeCompleted}
           isSkipSelected={isSkipSelected}
           selectedSkip={selectedSkip}
+          skips={skips}
         />
       </main>
 

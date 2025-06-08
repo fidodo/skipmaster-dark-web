@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export interface Skip {
   id: string;
@@ -112,7 +111,7 @@ export const useSkipData = (postcode: string) => {
       console.log("Fetching skips for postcode:", postcode);
       setLoading(true);
       try {
-        const postcodeArea = postcode.split(" ")[0] || postcode.substring(0, 4);
+        // const postcodeArea = postcode.split(" ")[0] || postcode.substring(0, 4);
         const response = await fetch(
           `https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft`
         );
@@ -120,17 +119,23 @@ export const useSkipData = (postcode: string) => {
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched skips:", data);
-          const transformedSkips = data.map((skip: any, index: number) => ({
+          const transformedSkips = data.map((skip: Skip, index: number) => ({
             id: skip.id ? skip.id.toString() : `skip-${index}`,
             name: skip.name || `${skip.size || "4"} Yard Skip`,
-            price: skip.price_before_vat && skip.vat
-              ? `£${skip.price_before_vat + (skip.price_before_vat * (skip.vat / 100))}`
-              : skip.price_before_vat 
+            price:
+              skip.price_before_vat && skip.vat
+                ? `£${
+                    skip.price_before_vat +
+                    skip.price_before_vat * (skip.vat / 100)
+                  }`
+                : skip.price_before_vat
                 ? `£${skip.price_before_vat}`
                 : "£211",
-            description: skip.description || `Perfect for projects (${skip.size || 4} yard capacity)`,
+            description:
+              skip.description ||
+              `Perfect for projects (${skip.size || 4} yard capacity)`,
             details: `${skip.hire_period_days || 14}-day hire period`,
-            image: skip.image || "/lovable-uploads/42ca4871-a851-4dcd-8117-88f5faf25402.png",
+            image: skip.image || "/images/picture.jpeg",
             available: skip.available !== false && !skip.forbidden,
             allowed_on_road: skip.allowed_on_road,
             allows_heavy_waste: skip.allows_heavy_waste,

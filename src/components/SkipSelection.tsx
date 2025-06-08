@@ -1,12 +1,12 @@
-
 import React from "react";
 import SkipCard from "./SkipCard";
+import { Skip } from "@/hooks/useSkipData";
 
 interface SkipSelectionProps {
   selectedSkip: string | null;
   onSkipSelect: (skipId: string) => void;
   isCompleted: boolean;
-  skips: any[];
+  skips: Skip[];
   loading: boolean;
 }
 
@@ -31,7 +31,7 @@ const SkipSelection: React.FC<SkipSelectionProps> = ({
       </div>
     );
   }
-
+  console.log("selection", skips);
   return (
     <div className="mb-8 md:mb-16">
       <div className="flex items-center justify-center mb-6 md:mb-8">
