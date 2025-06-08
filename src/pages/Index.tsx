@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Check, Clock, AlertCircle, Recycle } from "lucide-react";
 import NavigationTabs from "../components/NavigationTabs";
@@ -7,7 +6,7 @@ import WasteTypeSelector from "../components/WasteTypeSelector";
 import SkipSelection from "../components/SkipSelection";
 import SelectedSkipInfo from "../components/SelectedSkipInfo";
 import Footer from "../components/Footer";
-import { useSkipContext } from "../contexts/SkipContext";
+import { useSkipContext } from "../hooks/useSkipContext";
 
 const Index = () => {
   const { selectedSkip, setSelectedSkip, fetchSkips, skips } = useSkipContext();

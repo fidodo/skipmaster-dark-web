@@ -1,7 +1,6 @@
-
 import React, { useEffect } from "react";
 import SkipCard from "./SkipCard";
-import { useSkipContext } from "../contexts/SkipContext";
+import { useSkipContext } from "../hooks/useSkipContext";
 
 interface SkipSelectionProps {
   selectedSkip: string | null;

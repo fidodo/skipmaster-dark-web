@@ -1,5 +1,4 @@
-
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 import { Skip, getDefaultSkips } from '../constants/skipData';
 
 interface SkipContextType {
@@ -11,15 +10,7 @@ interface SkipContextType {
   setSelectedSkip: (skipId: string | null) => void;
 }
 
-const SkipContext = createContext<SkipContextType | undefined>(undefined);
-
-export const useSkipContext = () => {
-  const context = useContext(SkipContext);
-  if (context === undefined) {
-    throw new Error('useSkipContext must be used within a SkipProvider');
-  }
-  return context;
-};
+export const SkipContext = createContext<SkipContextType | undefined>(undefined);
 
 interface SkipProviderProps {
   children: ReactNode;
