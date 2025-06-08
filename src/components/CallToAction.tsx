@@ -1,3 +1,4 @@
+
 import React from "react";
 import SelectedSkipInfo from "./SelectedSkipInfo";
 import { Skip } from "@/hooks/useSkipData";
@@ -17,13 +18,18 @@ const CallToAction: React.FC<CallToActionProps> = ({
   selectedSkip,
   skips,
 }) => {
+  // Filter skips to find the selected skip object
+  const selectedSkipObject = selectedSkip ? skips.find(skip => skip.id === selectedSkip) : null;
+  
+  console.log("Selected skip object:", selectedSkipObject);
   console.log("gfr", skips);
+  
   return (
     <div className="text-center">
       <h3 className="text-xl md:text-2xl font-bold mb-4">Ready to Proceed?</h3>
 
       {/* Disclaimer and Product Description */}
-      {isSkipSelected && (
+      {isSkipSelected && selectedSkipObject && (
         <div className="mb-6">
           {/* Product Description */}
           <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
@@ -37,20 +43,12 @@ const CallToAction: React.FC<CallToActionProps> = ({
             </div>
             <div className="text-center">
               <h4 className="text-lg font-semibold text-white mb-2">
-                {selectedSkip === "4-yard" && "4 Yard Skip"}
-                {selectedSkip === "6-yard" && "6 Yard Skip"}
-                {selectedSkip === "8-yard" && "8 Yard Skip"}
-                {selectedSkip === "10-yard" && "10 Yard Skip"}
-                {selectedSkip === "12-yard" && "12 Yard Skip"}
+                {selectedSkipObject.name}
               </h4>
               <div className="text-xl font-bold text-[#4C6EF5] mb-1">
-                {selectedSkip === "4-yard" && "£298"}
-                {selectedSkip === "6-yard" && "£282"}
-                {selectedSkip === "8-yard" && "£322"}
-                {selectedSkip === "10-yard" && "£330"}
-                {selectedSkip === "12-yard" && "£341"}
+                {selectedSkipObject.price}
               </div>
-              <p className="text-sm text-gray-300">for a 14-day hire</p>
+              <p className="text-sm text-gray-300">for a {selectedSkipObject.hire_period_days || 14}-day hire</p>
             </div>
           </div>
         </div>
