@@ -27,30 +27,6 @@ const Index = () => {
     }
   };
 
-  // Filter skips by selectedSkip and extract required properties
-  const getSelectedSkipDetails = () => {
-    if (!selectedSkip || !skips.length) return null;
-    
-    const selectedSkipObject = skips.find(skip => skip.id === selectedSkip);
-    
-    if (!selectedSkipObject) return null;
-    
-    return {
-      allowed_on_road: selectedSkipObject.allowed_on_road,
-      allows_heavy_waste: selectedSkipObject.allows_heavy_waste,
-      hire_period_days: selectedSkipObject.hire_period_days,
-      size: selectedSkipObject.size,
-      price: selectedSkipObject.price
-    };
-  };
-
-  const selectedSkipDetails = getSelectedSkipDetails();
-  
-  // Log the filtered skip details when available
-  if (selectedSkipDetails) {
-    console.log("Selected skip details:", selectedSkipDetails);
-  }
-
   const isWasteTypeCompleted = selectedWasteTypes.length > 0;
   const isSkipSelected = selectedSkip !== null;
   console.log("indexi", skips);
