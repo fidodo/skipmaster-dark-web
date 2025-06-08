@@ -157,6 +157,43 @@ const Index = () => {
           <h3 className="text-xl md:text-2xl font-bold mb-4">
             Ready to Proceed?
           </h3>
+          
+          {/* Disclaimer and Product Description */}
+          {isSkipSelected && (
+            <div className="mb-6">
+              {/* Disclaimer */}
+              <div className="bg-gray-800/30 rounded-lg p-4 mb-4 text-sm text-gray-400">
+                <p>
+                  Please note: Imagery and information may not reflect exact specifications. 
+                  Colors may vary and additional options or accessories may incur extra costs.
+                </p>
+              </div>
+              
+              {/* Product Description */}
+              <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+                <div className="text-center">
+                  <h4 className="text-lg font-semibold text-white mb-2">
+                    {selectedSkip === '4-yard' && '4 Yard Skip'}
+                    {selectedSkip === '6-yard' && '6 Yard Skip'}
+                    {selectedSkip === '8-yard' && '8 Yard Skip'}
+                    {selectedSkip === '10-yard' && '10 Yard Skip'}
+                    {selectedSkip === '12-yard' && '12 Yard Skip'}
+                  </h4>
+                  <div className="text-xl font-bold text-[#4C6EF5] mb-1">
+                    {selectedSkip === '4-yard' && '£298'}
+                    {selectedSkip === '6-yard' && '£282'}
+                    {selectedSkip === '8-yard' && '£322'}
+                    {selectedSkip === '10-yard' && '£330'}
+                    {selectedSkip === '12-yard' && '£341'}
+                  </div>
+                  <p className="text-sm text-gray-300">
+                    for a 14-day hire
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+          
           <p className="text-gray-300 mb-4 text-sm md:text-base">
             Complete all steps above to continue with your booking
           </p>
