@@ -11,12 +11,15 @@ interface SkipSelectionProps {
 interface Skip {
   id: string;
   name: string;
-  price: string;
+  price_before_vat: number | string;
   description: string;
   details: string;
   image: string;
   available: boolean;
   size?: string; // Optional size field for flexibility
+  vat?: string; // Optional VAT field for flexibility
+  transport_cost?: number; // Optional transport cost field
+  forbidden?: boolean; // Optional forbidden field
 }
 
 const SkipSelection: React.FC<SkipSelectionProps> = ({
@@ -47,10 +50,12 @@ const SkipSelection: React.FC<SkipSelectionProps> = ({
           const transformedSkips = data.map((skip: Skip, index: number) => ({
             id: skip.id || `skip-${index}`,
             name: skip.name || `${skip.size || "4"} Yard Skip`,
-            price: skip.price ? `£${skip.price}` : "£211",
+            price: skip.price_before_vat
+              ? `£${skip.price_before_vat + skip.vat}`
+              : "£211",
             description: skip.description || `Small projects (20-40 bin bags)`,
             details: skip.details || "14-day hire period",
-            image: "/lovable-uploads/42ca4871-a851-4dcd-8117-88f5faf25402.png",
+            image: skip.image || "/images/picture.jpeg",
             available: skip.available !== false,
           }));
           setSkips(transformedSkips);
@@ -74,7 +79,7 @@ const SkipSelection: React.FC<SkipSelectionProps> = ({
     {
       id: "4-yard",
       name: "4 Yard Skip",
-      price: "£211",
+      price_before_vat: "£211",
       description: "Small projects (20-40 bin bags)",
       details: "14-day hire period",
       image: "/lovable-uploads/42ca4871-a851-4dcd-8117-88f5faf25402.png",
@@ -83,7 +88,7 @@ const SkipSelection: React.FC<SkipSelectionProps> = ({
     {
       id: "6-yard",
       name: "6 Yard Skip",
-      price: "£235",
+      price_before_vat: "£235",
       description: "Medium projects (40-60 bin bags)",
       details: "14-day hire period",
       image: "/lovable-uploads/42ca4871-a851-4dcd-8117-88f5faf25402.png",
@@ -92,7 +97,7 @@ const SkipSelection: React.FC<SkipSelectionProps> = ({
     {
       id: "8-yard",
       name: "8 Yard Skip",
-      price: "£268",
+      price_before_vat: "£268",
       description: "Large projects (60-80 bin bags)",
       details: "14-day hire period",
       image: "/lovable-uploads/42ca4871-a851-4dcd-8117-88f5faf25402.png",
@@ -101,16 +106,16 @@ const SkipSelection: React.FC<SkipSelectionProps> = ({
     {
       id: "10-yard",
       name: "10 Yard Skip",
-      price: "£275",
+      price_before_vat: "£275",
       description: "Extra large projects (80-100 bin bags)",
       details: "14-day hire period",
-      image: "/lovable-uploads/42ca4871-a851-4dcd-8117-88f5faf25402.png",
+      image: "/public/images/10yards.jpeg",
       available: false,
     },
     {
       id: "12-yard",
       name: "12 Yard Skip",
-      price: "£284",
+      price_before_vat: "£284",
       description: "Major projects (100+ bin bags)",
       details: "14-day hire period",
       image: "/lovable-uploads/42ca4871-a851-4dcd-8117-88f5faf25402.png",
