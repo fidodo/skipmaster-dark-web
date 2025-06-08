@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Check, Clock, AlertCircle, Recycle } from "lucide-react";
 import NavigationTabs from "../components/NavigationTabs";
 import HeroSection from "../components/HeroSection";
@@ -6,10 +6,9 @@ import WasteTypeSelector from "../components/WasteTypeSelector";
 import SkipSelection from "../components/SkipSelection";
 import SelectedSkipInfo from "../components/SelectedSkipInfo";
 import Footer from "../components/Footer";
-import { useSkipContext } from "../hooks/useSkipContext";
 
 const Index = () => {
-  const { selectedSkip, setSelectedSkip, fetchSkips, skips } = useSkipContext();
+  const [selectedSkip, setSelectedSkip] = useState<string | null>(null);
   const [postcode, setPostcode] = useState("");
   const [selectedWasteTypes, setSelectedWasteTypes] = useState<string[]>([]);
   const [isPostcodeCompleted, setIsPostcodeCompleted] = useState(false);
@@ -22,20 +21,11 @@ const Index = () => {
     if (postcode.trim()) {
       console.log("Checking availability for postcode:", postcode);
       setIsPostcodeCompleted(true);
-      fetchSkips(postcode);
     }
   };
 
   const isWasteTypeCompleted = selectedWasteTypes.length > 0;
   const isSkipSelected = selectedSkip !== null;
-
-  // Get selected skip data from context
-  const getSelectedSkipData = () => {
-    if (!selectedSkip) return null;
-    return skips.find(skip => skip.id === selectedSkip);
-  };
-
-  const selectedSkipData = getSelectedSkipData();
 
   return (
     <div className="min-h-screen bg-[#1C2526] text-white">
@@ -169,7 +159,7 @@ const Index = () => {
           </h3>
           
           {/* Disclaimer and Product Description */}
-          {isSkipSelected && selectedSkipData && (
+          {isSkipSelected && (
             <div className="mb-6">
               {/* Disclaimer */}
               <div className="bg-gray-800/30 rounded-lg p-4 mb-4 text-sm text-gray-400">
@@ -183,13 +173,21 @@ const Index = () => {
               <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
                 <div className="text-center">
                   <h4 className="text-lg font-semibold text-white mb-2">
-                    {selectedSkipData.name}
+                    {selectedSkip === '4-yard' && '4 Yard Skip'}
+                    {selectedSkip === '6-yard' && '6 Yard Skip'}
+                    {selectedSkip === '8-yard' && '8 Yard Skip'}
+                    {selectedSkip === '10-yard' && '10 Yard Skip'}
+                    {selectedSkip === '12-yard' && '12 Yard Skip'}
                   </h4>
                   <div className="text-xl font-bold text-[#4C6EF5] mb-1">
-                    {selectedSkipData.price}
+                    {selectedSkip === '4-yard' && '£298'}
+                    {selectedSkip === '6-yard' && '£282'}
+                    {selectedSkip === '8-yard' && '£322'}
+                    {selectedSkip === '10-yard' && '£330'}
+                    {selectedSkip === '12-yard' && '£341'}
                   </div>
                   <p className="text-sm text-gray-300">
-                    for a {selectedSkipData.hire_period_days || 14}-day hire
+                    for a 14-day hire
                   </p>
                 </div>
               </div>
