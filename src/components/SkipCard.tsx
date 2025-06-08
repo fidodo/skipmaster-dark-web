@@ -1,4 +1,6 @@
+
 import React from "react";
+import { Badge } from "./ui/badge";
 
 interface Skip {
   id: string;
@@ -8,6 +10,19 @@ interface Skip {
   details: string;
   image: string;
   available: boolean;
+  allowed_on_road?: boolean;
+  allows_heavy_waste?: boolean;
+  area?: string;
+  created_at?: string;
+  forbidden?: boolean;
+  hire_period_days?: number;
+  per_tonne_cost?: number | null;
+  postcode?: string;
+  price_before_vat?: number;
+  size?: number;
+  transport_cost?: number | null;
+  updated_at?: string;
+  vat?: number;
 }
 
 interface SkipCardProps {
@@ -26,6 +41,14 @@ const SkipCard: React.FC<SkipCardProps> = ({ skip, isSelected, onSelect }) => {
           : "border-gray-700"
       } ${!skip.available ? "opacity-60" : ""}`}
     >
+      {isSelected && (
+        <div className="absolute -top-2 -right-2 z-20">
+          <Badge variant="default" className="bg-[#4C6EF5] text-white px-2 py-1 text-xs font-semibold">
+            Selected
+          </Badge>
+        </div>
+      )}
+
       {!skip.available && (
         <div className="absolute inset-0 bg-red-500/20 rounded-lg flex items-center justify-center z-10">
           <span className="bg-red-500 text-white px-3 md:px-4 py-1 md:py-2 rounded-lg font-semibold transform -rotate-12 text-sm md:text-base">
@@ -61,6 +84,22 @@ const SkipCard: React.FC<SkipCardProps> = ({ skip, isSelected, onSelect }) => {
               {skip.details}
             </span>
           </div>
+          {skip.allowed_on_road && (
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
+              <span className="text-xs md:text-sm text-gray-300">
+                Road permit available
+              </span>
+            </div>
+          )}
+          {skip.allows_heavy_waste && (
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full flex-shrink-0"></div>
+              <span className="text-xs md:text-sm text-gray-300">
+                Heavy waste accepted
+              </span>
+            </div>
+          )}
         </div>
 
         <button
