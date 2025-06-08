@@ -1,6 +1,5 @@
-
 import React from "react";
-import SelectedSkipInfo from "./SelectedSkipInfo";
+
 import { Skip } from "@/hooks/useSkipData";
 
 interface CallToActionProps {
@@ -19,11 +18,13 @@ const CallToAction: React.FC<CallToActionProps> = ({
   skips,
 }) => {
   // Filter skips to find the selected skip object
-  const selectedSkipObject = selectedSkip ? skips.find(skip => skip.id === selectedSkip) : null;
-  
+  const selectedSkipObject = selectedSkip
+    ? skips.find((skip) => skip.id === selectedSkip)
+    : null;
+
   console.log("Selected skip object:", selectedSkipObject);
   console.log("gfr", skips);
-  
+
   return (
     <div className="text-center">
       <h3 className="text-xl md:text-2xl font-bold mb-4">Ready to Proceed?</h3>
@@ -48,7 +49,9 @@ const CallToAction: React.FC<CallToActionProps> = ({
               <div className="text-xl font-bold text-[#4C6EF5] mb-1">
                 {selectedSkipObject.price}
               </div>
-              <p className="text-sm text-gray-300">for a {selectedSkipObject.hire_period_days || 14}-day hire</p>
+              <p className="text-sm text-gray-300">
+                for a {selectedSkipObject.hire_period_days || 14}-day hire
+              </p>
             </div>
           </div>
         </div>
@@ -57,9 +60,6 @@ const CallToAction: React.FC<CallToActionProps> = ({
       <p className="text-gray-300 mb-4 text-sm md:text-base">
         Complete all steps above to continue with your booking
       </p>
-
-      {/* Selected Skip Information */}
-      {isSkipSelected && <SelectedSkipInfo selectedSkip={selectedSkip} />}
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 md:mt-8">
         <button className="w-full sm:w-auto bg-gray-600 hover:bg-gray-500 text-white px-6 md:px-8 py-3 rounded-lg font-medium transition-colors text-sm md:text-base">
