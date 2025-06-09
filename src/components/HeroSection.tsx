@@ -1,34 +1,38 @@
 
-import React from 'react';
-import PostcodeInput from './PostcodeInput';
+import React from "react";
+import PostcodeInput from "./PostcodeInput";
 
 interface HeroSectionProps {
   postcode: string;
   setPostcode: (postcode: string) => void;
   onCheckAvailability: () => void;
   isPostcodeCompleted: boolean;
+  postcodeError?: string;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ 
-  postcode, 
-  setPostcode, 
-  onCheckAvailability, 
-  isPostcodeCompleted 
+const HeroSection: React.FC<HeroSectionProps> = ({
+  postcode,
+  setPostcode,
+  onCheckAvailability,
+  isPostcodeCompleted,
+  postcodeError,
 }) => {
   return (
-    <div className="text-center mb-12">
-      <h2 className="text-4xl md:text-5xl font-bold mb-4">
-        Choose Your <span className="text-[#4C6EF5]">Perfect Skip</span>
-      </h2>
-      <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-        Select the right size for your waste disposal needs with our transparent pricing and reliable service
+    <div className="text-center mb-8 md:mb-16">
+      <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">
+        Skip Hire Made Simple
+      </h1>
+      <p className="text-gray-300 mb-6 md:mb-8 text-base md:text-lg max-w-2xl mx-auto">
+        Fast, reliable skip hire service. Check availability in your area and
+        book online in minutes.
       </p>
-      
+
       <PostcodeInput
         postcode={postcode}
         setPostcode={setPostcode}
         onCheckAvailability={onCheckAvailability}
         isCompleted={isPostcodeCompleted}
+        postcodeError={postcodeError}
       />
     </div>
   );

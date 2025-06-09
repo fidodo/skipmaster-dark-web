@@ -1,3 +1,4 @@
+
 import React from "react";
 import SkipCard from "./SkipCard";
 import { Skip } from "@/hooks/useSkipData";
@@ -5,6 +6,7 @@ import { Skip } from "@/hooks/useSkipData";
 interface SkipSelectionProps {
   selectedSkip: string | null;
   onSkipSelect: (skipId: string) => void;
+  onSkipDeselect: () => void;
   isCompleted: boolean;
   skips: Skip[];
   loading: boolean;
@@ -13,6 +15,7 @@ interface SkipSelectionProps {
 const SkipSelection: React.FC<SkipSelectionProps> = ({
   selectedSkip,
   onSkipSelect,
+  onSkipDeselect,
   isCompleted,
   skips,
   loading,
@@ -49,6 +52,7 @@ const SkipSelection: React.FC<SkipSelectionProps> = ({
             skip={skip}
             isSelected={selectedSkip === skip.id}
             onSelect={onSkipSelect}
+            onDeselect={onSkipDeselect}
           />
         ))}
       </div>

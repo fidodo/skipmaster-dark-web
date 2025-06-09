@@ -29,10 +29,22 @@ interface SkipCardProps {
   skip: Skip;
   isSelected: boolean;
   onSelect: (skipId: string) => void;
+  onDeselect: () => void;
 }
 
-const SkipCard: React.FC<SkipCardProps> = ({ skip, isSelected, onSelect }) => {
+const SkipCard: React.FC<SkipCardProps> = ({ skip, isSelected, onSelect, onDeselect }) => {
   console.log("Rendering SkipCard for skip:", skip);
+  
+  const handleButtonClick = () => {
+    if (!skip.available) return;
+    
+    if (isSelected) {
+      onDeselect();
+    } else {
+      onSelect(skip.id);
+    }
+  };
+
   return (
     <div
       className={`relative bg-gray-800/50 rounded-lg border transition-all duration-300 hover:scale-105 ${
@@ -103,17 +115,17 @@ const SkipCard: React.FC<SkipCardProps> = ({ skip, isSelected, onSelect }) => {
         </div>
 
         <button
-          onClick={() => skip.available && !isSelected && onSelect(skip.id)}
-          disabled={!skip.available || isSelected}
+          onClick={handleButtonClick}
+          disabled={!skip.available}
           className={`w-full py-2 md:py-3 rounded-lg font-medium transition-colors text-sm md:text-base ${
-            isSelected
-              ? "bg-green-500 text-white cursor-default"
-              : skip.available
-              ? "bg-[#4C6EF5] hover:bg-[#3B5BDB] text-white"
-              : "bg-gray-600 text-gray-400 cursor-not-allowed"
+            !skip.available
+              ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+              : isSelected
+              ? "bg-red-500 hover:bg-red-600 text-white"
+              : "bg-[#4C6EF5] hover:bg-[#3B5BDB] text-white"
           }`}
         >
-          {isSelected ? "Selected" : skip.available ? "Select This Skip" : "Not Available"}
+          {!skip.available ? "Not Available" : isSelected ? "Unselect" : "Select This Skip"}
         </button>
       </div>
     </div>

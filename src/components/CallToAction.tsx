@@ -1,3 +1,4 @@
+
 import React from "react";
 
 import { Skip } from "@/hooks/useSkipData";
@@ -8,6 +9,7 @@ interface CallToActionProps {
   isSkipSelected: boolean;
   selectedSkip: string | null;
   skips: Skip[];
+  onBackToWasteType: () => void;
 }
 
 const CallToAction: React.FC<CallToActionProps> = ({
@@ -16,6 +18,7 @@ const CallToAction: React.FC<CallToActionProps> = ({
   isSkipSelected,
   selectedSkip,
   skips,
+  onBackToWasteType,
 }) => {
   // Filter skips to find the selected skip object
   const selectedSkipObject = selectedSkip
@@ -62,7 +65,10 @@ const CallToAction: React.FC<CallToActionProps> = ({
       </p>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 md:mt-8">
-        <button className="w-full sm:w-auto bg-gray-600 hover:bg-gray-500 text-white px-6 md:px-8 py-3 rounded-lg font-medium transition-colors text-sm md:text-base">
+        <button 
+          onClick={onBackToWasteType}
+          className="w-full sm:w-auto bg-gray-600 hover:bg-gray-500 text-white px-6 md:px-8 py-3 rounded-lg font-medium transition-colors text-sm md:text-base"
+        >
           ← Back to Waste Type
         </button>
         <button
