@@ -124,6 +124,7 @@ const [isPostcodeCompleted, setIsPostcodeCompleted] = useState(false);
 3. Install dependencies: `npm install`
 4. Start development server: `npm run dev`
 5. Copy and Open http://localhost:8080 in your browser
+6. If it does break on first load, rerun `npm run dev`
 
 ## Technologies Used
 
