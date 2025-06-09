@@ -42,7 +42,8 @@ The application follows a component-based architecture with the following key pr
 ### Skip Selection UX Features
 
 - **Visual Selection State**: Selected skips show a blue "Selected" badge
-- **Button State Management**: "Select This Skip" changes to "Selected" and becomes disabled
+- **Button State Management**: "Select This Skip" changes to "Unselect" and deselect the skip on click.
+- **Back to Waste Types**: Deselect the skip chosen
 - **Selected Skip Display**: Chosen skip information appears under "Ready to Proceed" text
 - **Price Calculation**: Shows price before VAT, VAT amount, and total price
 - **Skip Details**: Displays hire period, size, road placement, and heavy waste acceptance
@@ -105,7 +106,7 @@ const [isPostcodeCompleted, setIsPostcodeCompleted] = useState(false);
 
 ### Skip Selection Enhancement
 - Added visual feedback for selected skips with blue "Selected" badge
-- Button state changes from "Select This Skip" to "Selected" when chosen
+- Button state changes from "Select This Skip" to "unSelect" when chosen
 - Selected skip information now displays under "Ready to Proceed" text
 - Improved mobile responsiveness for skip selection interface
 - Enhanced price display with VAT breakdown
@@ -119,9 +120,10 @@ const [isPostcodeCompleted, setIsPostcodeCompleted] = useState(false);
 ## Getting Started
 
 1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development server: `npm run dev`
-4. Open http://localhost:5173 in your browser
+2. checkout to the file if using vscode.
+3. Install dependencies: `npm install`
+4. Start development server: `npm run dev`
+5. Copy and Open http://localhost:8080 in your browser
 
 ## Technologies Used
 
